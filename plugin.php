@@ -30,6 +30,11 @@ class Plugin {
    */
   public function print_backend_controls( $event_id ) {
      $html_template = '<tr>' .
+                      '<td class="tribe_sectionheader" colspan="2">' .
+                      '<h4>MVOC Details</h4>' .
+                      '</td>' .
+                      '</tr>' .     
+                      '<tr>' .
                       '<td>%s</td>' .
                       '<td><input type="number" name="%s" value="%s"></td>' .
                       '</tr>';
