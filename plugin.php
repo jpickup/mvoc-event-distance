@@ -11,11 +11,11 @@ class Plugin {
   /**
    * The meta key used to store the site editor choice in regard to an event support for distance entry.
    */
-  const META_KEY = '_distance';
+  const META_DISTANCE_KEY = '_distance';
  
   /**
    * Plugin constructor.
-   * The method will register the plugin instance in the `walkin_purchases` to allow global access to the instance.
+   * The method will register the plugin instance 
    */
   public function __construct() {
      global $mvoc_event_distance;
@@ -31,7 +31,7 @@ class Plugin {
   public function print_backend_controls( $event_id ) {
      $html_template = '<tr>' .
                       '<td class="tribe_sectionheader" colspan="2">' .
-                      '<h4>MVOC Details</h4>' .
+                      '<h4>MVOC Custom Details</h4>' .
                       '</td>' .
                       '</tr>' .     
                       '<tr>' .
@@ -42,8 +42,8 @@ class Plugin {
      printf(
         $html_template,
         esc_html( 'Distance (miles):' ),
-        self::META_KEY,
-        get_post_meta( $event_id, self::META_KEY, true )
+        self::META_DISTANCE_KEY,
+        get_post_meta( $event_id, self::META_DISTANCE_KEY, true )
      );
   }
  
@@ -53,11 +53,11 @@ class Plugin {
    * @param int $event_id The post ID of the event currently being saved.
    */
   public function save_meta( $event_id ) {
-     $distance = tribe_get_request_var( self::META_KEY, false );
+     $distance = tribe_get_request_var( self::META_DISTANCE_KEY, false );
      if ( $distance ) {
-        update_post_meta( $event_id, self::META_KEY, $distance );
+        update_post_meta( $event_id, self::META_DISTANCE_KEY, $distance );
      } else {
-        delete_post_meta( $event_id, self::META_KEY );
+        delete_post_meta( $event_id, self::META_DISTANCE_KEY );
      }
   }
  
